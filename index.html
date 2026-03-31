@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>March's Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- MOBILE WARNING -->
+  <div id="mobile-warning">
+    <div class="mobile-inner">
+      <div class="mobile-icon">&#128187;</div>
+      <h2>Best viewed on desktop</h2>
+      <p>This portfolio is designed as a macOS desktop experience. Please open it on a larger screen for the full effect.</p>
+      <a href="mailto:march.siwawong@gmail.com" class="mobile-btn">march.siwawong@gmail.com</a>
+    </div>
+  </div>
+
+  <!-- DESKTOP -->
+  <div id="desktop">
+
+    <!-- MENUBAR -->
+    <div id="menubar">
+      <div class="menubar-left">
+        <span class="menu-item menu-bold" id="menu-name">Home</span>
+        <span class="menu-item" onclick="openWindow('contact-win')">Contact</span>
+        <span class="menu-item" onclick="openWindow('win-resume')">Resume</span>
+      </div>
+      <div class="menubar-right">
+        <button class="lang-btn" id="lang-toggle-btn" onclick="toggleLang()">EN</button>
+        <span id="menubar-time"></span>
+        <span id="menubar-date"></span>
+      </div>
+    </div>
+
+    <!-- DOT GRID BACKGROUND -->
+    <div class="dot-grid"></div>
+
+    <!-- CENTER TITLE -->
+    <div id="center-title">
+      <div class="center-main">
+        <span class="center-march">march's</span>
+        <span class="center-portfolio">portfolio.</span>
+      </div>
+    </div>
+
+    <!-- PHOTO WIDGET -->
+    <div class="desktop-item" id="photo-widget" style="left:32px; top:60px;">
+      <div class="polaroid">
+        <div class="polaroid-img">
+          <img src="photo.jpeg" alt="March" onerror="this.style.display='none'; this.parentElement.classList.add('photo-placeholder')">
+        </div>
+        <div class="polaroid-caption">march, 2025</div>
+      </div>
+    </div>
+
+    <!-- INSTRUCTION NOTE -->
+    <div class="desktop-item" id="note-widget" style="left:295px; top:60px;">
+      <div class="note-card">
+        <div class="note-title" data-en="How to use" data-th="วิธีใช้งาน">How to use</div>
+        <div class="note-item" data-en="→ Drag folders anywhere" data-th="→ ลากโฟลเดอร์ได้เลย">→ Drag folders anywhere</div>
+        <div class="note-item" data-en="→ Double-click to open" data-th="→ ดับเบิลคลิกเพื่อเปิด">→ Double-click to open</div>
+        <div class="note-item" data-en="→ Chat icon = ask about me" data-th="→ ไอคอนแชท = ถามเกี่ยวกับฉัน">→ Chat icon = ask about me</div>
+        <div class="note-item" data-en="→ Don't open that box..." data-th="→ อย่าเปิดกล่องนั้นนะ...">→ Don't open that box...</div>
+      </div>
+    </div>
+
+    <!-- PROJECTS FOLDER -->
+    <div class="desktop-item folder-item" id="folder-projects" style="right:100px; top:70px;"
+         ondblclick="openWindow('win-projects')">
+      <div class="folder-icon coral-folder">
+        <div class="folder-tab"></div>
+        <div class="folder-body"></div>
+      </div>
+      <div class="folder-label" data-en="Projects" data-th="โปรเจกต์">Projects</div>
+    </div>
+
+    <!-- CERTIFICATES FOLDER -->
+    <div class="desktop-item folder-item" id="folder-certs" style="right:100px; top:158px;"
+         ondblclick="openWindow('win-certs')">
+      <div class="folder-icon blue-folder">
+        <div class="folder-tab"></div>
+        <div class="folder-body"></div>
+      </div>
+      <div class="folder-label" data-en="Certificates" data-th="ใบรับรอง">Certificates</div>
+    </div>
+
+    <!-- RESUME FILE -->
+    <div class="desktop-item folder-item" id="file-resume" style="left:40px; bottom:80px;"
+         ondblclick="openWindow('win-resume')">
+      <div class="file-icon-wrap">
+        <div class="file-paper">
+          <div class="file-fold"></div>
+          <span class="file-type">PDF</span>
+        </div>
+      </div>
+      <div class="folder-label">Resume.pdf</div>
+    </div>
+
+    <!-- ABOUT ME FILE -->
+    <div class="desktop-item folder-item" id="file-about" style="left:120px; bottom:80px;"
+         ondblclick="openWindow('win-about')">
+      <div class="file-icon-wrap">
+        <div class="file-paper">
+          <div class="file-fold"></div>
+          <span class="file-type">TXT</span>
+        </div>
+      </div>
+      <div class="folder-label" data-en="about_me.txt" data-th="เกี่ยวกับฉัน.txt">about_me.txt</div>
+    </div>
+
+    <!-- EASTER EGG -->
+    <div class="desktop-item folder-item" id="easter-egg" style="right:40px; bottom:80px;"
+         ondblclick="openWindow('win-easter')">
+      <div class="easter-wrap">
+        <div class="easter-icon">?</div>
+      </div>
+      <div class="folder-label" data-en="Don't Open" data-th="อย่าเปิด">Don't Open</div>
+    </div>
+
+    <!-- MUSIC PLAYER (bottom right, above dock) -->
+    <div id="music-player" style="position:fixed; bottom:68px; right:20px; z-index:50;">
+      <div class="player-card">
+        <div class="player-top">
+          <div class="vinyl-disc" id="vinyl">
+            <div class="vinyl-ring r1"></div>
+            <div class="vinyl-ring r2"></div>
+            <div class="vinyl-hole"></div>
+          </div>
+          <div class="player-info">
+            <div class="player-track">Chill Vibes</div>
+            <div class="player-artist">March's Playlist</div>
+          </div>
+        </div>
+        <a href="https://open.spotify.com/playlist/64bfMusHd1W2TawcJkoc1a?si=22ee6141e77f4932"
+           target="_blank" rel="noopener" class="spotify-link">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="#1db954"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          <span data-en="Open in Spotify" data-th="เปิดใน Spotify">Open in Spotify</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- DOCK -->
+    <div id="dock">
+      <div class="dock-wrap">
+        <div class="dock-item" onclick="scrollToTop()" title="Home">
+          <div class="dock-icon home-icon">&#127968;</div>
+          <div class="dock-dot"></div>
+          <div class="dock-tooltip">Home</div>
+        </div>
+        <div class="dock-item" onclick="openWindow('win-projects')" title="Projects">
+          <div class="dock-icon folder-dock-icon">&#128193;</div>
+          <div class="dock-tooltip">Projects</div>
+        </div>
+        <div class="dock-item" onclick="openWindow('chat-win')" title="Ask March">
+          <div class="dock-icon chat-dock-icon">&#129302;</div>
+          <div class="dock-dot"></div>
+          <div class="dock-tooltip" data-en="Ask March" data-th="ถามมาร์ช">Ask March</div>
+        </div>
+        <div class="dock-item" onclick="openWindow('win-resume')" title="Resume">
+          <div class="dock-icon resume-dock-icon">&#128196;</div>
+          <div class="dock-tooltip">Resume.pdf</div>
+        </div>
+        <div class="dock-separator"></div>
+        <div class="dock-item" onclick="openWindow('contact-win')" title="Contact">
+          <div class="dock-icon contact-dock-icon">&#9993;</div>
+          <div class="dock-tooltip">Contact</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════ -->
+    <!-- WINDOWS                            -->
+    <!-- ══════════════════════════════════ -->
+
+    <!-- PROJECTS WINDOW -->
+    <div class="mac-window" id="win-projects" style="left:160px; top:80px; width:600px;">
+      <div class="win-titlebar" onmousedown="startDrag(event,'win-projects')">
+        <div class="win-controls">
+          <span class="win-btn close" onclick="closeWindow('win-projects')"></span>
+          <span class="win-btn maximize" onclick="maximizeWindow('win-projects')"></span>
+          <span class="win-btn minimize" onclick="minimizeWindow('win-projects')"></span>
+        </div>
+        <div class="win-title" data-en="Projects" data-th="โปรเจกต์">Projects</div>
+      </div>
+      <div class="win-body">
+        <div class="project-entry">
+          <div class="project-header">
+            <span class="project-tag thesis">Thesis</span>
+            <h3 data-en="Balance Game System" data-th="ระบบเกมสมดุล">Balance Game System</h3>
+          </div>
+          <p data-en="A real-time feedback loop built in Unity (C#) and Arduino. Physical sensor input drives dynamic game response — iterative calibration, embedded logic, same systems thinking I bring to prompt design."
+             data-th="ระบบ feedback แบบ real-time สร้างด้วย Unity (C#) และ Arduino อินพุตจากเซ็นเซอร์กายภาพขับเคลื่อนการตอบสนองเกมแบบไดนามิก">
+            A real-time feedback loop built in Unity (C#) and Arduino. Physical sensor input drives dynamic game response — iterative calibration, embedded logic, same systems thinking I bring to prompt design.
+          </p>
+          <div class="project-tools">
+            <span class="tool-tag">Unity</span><span class="tool-tag">C#</span><span class="tool-tag">Arduino</span><span class="tool-tag">Embedded Systems</span>
+          </div>
+        </div>
+        <div class="project-entry">
+          <div class="project-header">
+            <span class="project-tag wip">In Progress</span>
+            <h3 data-en="AI Trading System" data-th="ระบบเทรด AI">AI Trading System</h3>
+          </div>
+          <p data-en="Integrating LLM reasoning into financial data pipelines. Writing structured prompts for market analysis, evaluating hallucinations, and building evaluation frameworks to validate model output quality."
+             data-th="นำ LLM มาใช้ใน financial data pipeline เขียน structured prompts สำหรับการวิเคราะห์ตลาด และสร้าง evaluation framework">
+            Integrating LLM reasoning into financial data pipelines. Writing structured prompts for market analysis, evaluating hallucinations, and building evaluation frameworks to validate model output quality.
+          </p>
+          <div class="project-tools">
+            <span class="tool-tag">Python</span><span class="tool-tag">LLM</span><span class="tool-tag">Prompt Design</span><span class="tool-tag">Evaluation</span>
+          </div>
+        </div>
+        <div class="project-entry">
+          <div class="project-header">
+            <span class="project-tag internship">Internship</span>
+            <h3 data-en="Broadcast Audio Pipeline" data-th="ไปป์ไลน์เสียง Broadcast">Broadcast Audio Pipeline</h3>
+          </div>
+          <p data-en="End-to-end pre-production and dialogue mastering for broadcast at The Standard. Precision, consistency, QC under deadline — the same discipline that defines reliable AI output."
+             data-th="Pre-production และ dialogue mastering สำหรับ broadcast ที่ The Standard ความแม่นยำ ความสม่ำเสมอ และการควบคุมคุณภาพภายใต้ deadline">
+            End-to-end pre-production and dialogue mastering for broadcast at The Standard. Precision, consistency, QC under deadline — the same discipline that defines reliable AI output.
+          </p>
+          <div class="project-tools">
+            <span class="tool-tag">Logic Pro X</span><span class="tool-tag">Dialogue Mastering</span><span class="tool-tag">Broadcast</span>
+          </div>
+        </div>
+        <div class="project-entry" style="border-bottom:none">
+          <div class="project-header">
+            <span class="project-tag meta">Meta</span>
+            <h3 data-en="This Portfolio" data-th="พอร์ตโฟลิโอนี้">This Portfolio</h3>
+          </div>
+          <p data-en="A macOS desktop experience built from scratch — draggable windows, AI chat, live clock, bilingual toggle. Designed and coded as a project in itself."
+             data-th="ประสบการณ์ macOS desktop ที่สร้างจากศูนย์ — windows ลากได้ AI chat นาฬิกาจริง และการสลับภาษา">
+            A macOS desktop experience built from scratch — draggable windows, AI chat, live clock, bilingual toggle. Designed and coded as a project in itself.
+          </p>
+          <div class="project-tools">
+            <span class="tool-tag">HTML/CSS/JS</span><span class="tool-tag">Claude API</span><span class="tool-tag">Vercel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CERTIFICATES WINDOW -->
+    <div class="mac-window" id="win-certs" style="left:200px; top:100px; width:520px;">
+      <div class="win-titlebar" onmousedown="startDrag(event,'win-certs')">
+        <div class="win-controls">
+          <span class="win-btn close" onclick="closeWindow('win-certs')"></span>
+          <span class="win-btn maximize" onclick="maximizeWindow('win-certs')"></span>
+          <span class="win-btn minimize" onclick="minimizeWindow('win-certs')"></span>
+        </div>
+        <div class="win-title" data-en="Certificates" data-th="ใบรับรอง">Certificates</div>
+      </div>
+      <div class="win-body">
+        <p class="win-note" data-en="Certificates from Skilljar — more being added as I complete courses."
+           data-th="ใบรับรองจาก Skilljar — กำลังเพิ่มเติมเมื่อเรียนจบหลักสูตร">
+          Certificates from Skilljar — more being added as I complete courses.
+        </p>
+        <div class="cert-grid" id="cert-grid">
+          <div class="cert-placeholder">
+            <div class="cert-icon">&#127891;</div>
+            <div class="cert-name" data-en="Drop certificate images into<br>the /certs/ folder" data-th="วางรูปใบรับรองใน<br>โฟลเดอร์ /certs/">Drop certificate images into<br>the /certs/ folder</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT ME WINDOW -->
+    <div class="mac-window" id="win-about" style="left:180px; top:90px; width:520px;">
+      <div class="win-titlebar" onmousedown="startDrag(event,'win-about')">
+        <div class="win-controls">
+          <span class="win-btn close" onclick="closeWindow('win-about')"></span>
+          <span class="win-btn maximize" onclick="maximizeWindow('win-about')"></span>
+          <span class="win-btn minimize" onclick="minimizeWindow('win-about')"></span>
+        </div>
+        <div class="win-title">about_me.txt</div>
+      </div>
+      <div class="win-body terminal-body">
+        <pre class="about-text">
+<span class="t-label">NAME</span>       Siwawong Jearramanon (March)
+<span class="t-label">ROLE</span>       Multimedia Engineering Student → Prompt Engineer
+<span class="t-label">LOCATION</span>   Bangkok, Thailand — open to remote / international
+<span class="t-label">EMAIL</span>      march.siwawong@gmail.com
+<span class="t-label">GITHUB</span>     github.com/swwmrch
+
+<span class="t-label">EDUCATION</span>
+  Multimedia and Entertainment Engineering
+  Bangkok University — GPA 3.54 (2022–Present)
+
+  General Educational Development (GED) — 2021
+  Mathematics–English Program
+  St. Francis Xavier School, Nonthaburi (2016–2020)
+
+<span class="t-label">EXPERIENCE</span>
+  Audio Engineer Intern — The Standard (Jun–Aug 2025)
+  · Set up and operated recording systems for news & media production
+  · Edited, mixed, and mastered audio using Logic Pro X
+  · Performed audio QC: noise, clipping, balance, broadcast standards
+  · Worked under tight production deadlines alongside producers & editors
+
+<span class="t-label">PROJECTS</span>
+  · Balance Game System (Unity, C#, Arduino) — Thesis
+  · AI Trading System (Python, LLM, Prompt Design) — In progress
+  · Surround Sound System Design — Bangkok University, 2024
+  · This Portfolio (HTML/CSS/JS, Claude API)
+
+<span class="t-label">SKILLS</span>
+  AI & Prompting  → Prompt engineering, few-shot, chain-of-thought,
+                    Claude / GPT-4, output evaluation
+  Development     → C# / Unity, Arduino, HTML/CSS/JS, Python (learning)
+  Production      → Logic Pro X, dialogue mastering, broadcast pipeline
+
+<span class="t-label">LANGUAGES</span>  Thai (native) · English (professional)
+
+<span class="t-label">LOOKING FOR</span>
+  Prompt Engineer roles — AI product teams, research, or tooling.
+  Remote-friendly. Curious about problems where the gap between
+  a vague idea and a reliable output needs bridging.
+        </pre>
+      </div>
+    </div>
+
+    <!-- EASTER EGG WINDOW -->
+    <div class="mac-window" id="win-easter" style="left:220px; top:110px; width:440px;">
+      <div class="win-titlebar" onmousedown="startDrag(event,'win-easter')">
+        <div class="win-controls">
+          <span class="win-btn close" onclick="closeWindow('win-easter')"></span>
+          <span class="win-btn maximize" onclick="maximizeWindow('win-easter')"></span>
+          <span class="win-btn minimize" onclick="minimizeWindow('win-easter')"></span>
+        </div>
+        <div class="win-title">I told you not to open this.</div>
+      </div>
+      <div class="win-body">
+        <div class="easter-content">
+          <div class="easter-fact">
+            <span class="fact-num">01</span>
+            <p data-en="This whole website is a project. You're literally inside my portfolio right now."
+               data-th="เว็บไซต์นี้คือโปรเจกต์ ตอนนี้คุณอยู่ใน portfolio ของฉันแล้ว">
+              This whole website is a project. You're literally inside my portfolio right now.
+            </p>
+          </div>
+          <div class="easter-fact">
+            <span class="fact-num">02</span>
+            <p data-en="Interned as a sound engineer at The Standard. Turns out mixing audio and writing prompts need the same brain — precise inputs, clean outputs, zero noise."
+               data-th="ฝึกงานเป็น sound engineer ที่ The Standard ปรากฏว่าการมิกซ์เสียงและการเขียน prompts ต้องการสมองแบบเดียวกัน">
+              Interned as a sound engineer at The Standard. Turns out mixing audio and writing prompts need the same brain — precise inputs, clean outputs, zero noise.
+            </p>
+          </div>
+          <div class="easter-fact">
+            <span class="fact-num">03</span>
+            <p data-en="Currently building an AI trading system. It's sometimes wrong. I'm working on that."
+               data-th="กำลังสร้างระบบเทรด AI อยู่ มันผิดบ้าง กำลังแก้อยู่">
+              Currently building an AI trading system. It's sometimes wrong. I'm working on that.
+            </p>
+          </div>
+          <div class="easter-fact" style="border-bottom:none">
+            <span class="fact-num">04</span>
+            <p data-en="22. Bangkok-based, dreaming remote. Open to interesting problems anywhere in the world."
+               data-th="22 ปี อยู่บางกอก ฝันถึงงาน remote เปิดรับปัญหาน่าสนใจจากทุกที่ในโลก">
+              22. Bangkok-based, dreaming remote. Open to interesting problems anywhere in the world.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI CHAT WINDOW -->
+    <div class="mac-window" id="chat-win" style="left:200px; top:80px; width:400px;">
+      <div class="win-titlebar" onmousedown="startDrag(event,'chat-win')">
+        <div class="win-controls">
+          <span class="win-btn close" onclick="closeWindow('chat-win')"></span>
+          <span class="win-btn maximize" onclick="maximizeWindow('chat-win')"></span>
+          <span class="win-btn minimize" onclick="minimizeWindow('chat-win')"></span>
+        </div>
+        <div class="win-title" data-en="Ask March — AI Assistant" data-th="ถามมาร์ช — AI Assistant">Ask March — AI Assistant</div>
+      </div>
+      <div class="win-body chat-body">
+        <div class="chat-messages" id="chat-messages">
+          <div class="chat-msg assistant">
+            <span data-en="Hi! I'm March's AI assistant. Ask me anything about his background, projects, or what he's looking for."
+                  data-th="สวัสดี! ฉันเป็น AI assistant ของมาร์ช ถามฉันได้เลยเกี่ยวกับประวัติ โปรเจกต์ หรือสิ่งที่เขากำลังมองหา">
+              Hi! I'm March's AI assistant. Ask me anything about his background, projects, or what he's looking for.
+            </span>
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <input type="text" id="chat-input" placeholder="Ask something..." onkeydown="if(event.key==='Enter')sendChat()">
+          <button onclick="sendChat()" class="chat-send">&#8593;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT WINDOW -->
+    <div class="mac-window" id="contact-win" style="left:240px; top:120px; width:360px;">
+      <div class="win-titlebar" onmousedown="startDrag(event,'contact-win')">
+        <div class="win-controls">
+          <span class="win-btn close" onclick="closeWindow('contact-win')"></span>
+          <span class="win-btn maximize" onclick="maximizeWindow('contact-win')"></span>
+          <span class="win-btn minimize" onclick="minimizeWindow('contact-win')"></span>
+        </div>
+        <div class="win-title" data-en="Contact" data-th="ติดต่อ">Contact</div>
+      </div>
+      <div class="win-body">
+        <div class="contact-row">
+          <span class="contact-label">Email</span>
+          <a href="mailto:march.siwawong@gmail.com" class="contact-val">march.siwawong@gmail.com</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">GitHub</span>
+          <a href="https://github.com/swwmrch" target="_blank" rel="noopener" class="contact-val">github.com/swwmrch</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">LinkedIn</span>
+          <a href="#" class="contact-val muted" data-en="Add your LinkedIn URL" data-th="เพิ่ม LinkedIn URL">Add your LinkedIn URL</a>
+        </div>
+        <div class="contact-row" style="border-bottom:none">
+          <span class="contact-label">Location</span>
+          <span class="contact-val" data-en="Bangkok, Thailand — open to remote" data-th="บางกอก ไทย — พร้อม remote">Bangkok, Thailand — open to remote</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESUME PREVIEW WINDOW -->
+    <div class="mac-window" id="win-resume" style="left:200px; top:80px; width:620px; height:600px;">
+      <div class="win-titlebar" onmousedown="startDrag(event,'win-resume')">
+        <div class="win-controls">
+          <span class="win-btn close" onclick="closeWindow('win-resume')"></span>
+          <span class="win-btn maximize" onclick="maximizeWindow('win-resume')"></span>
+          <span class="win-btn minimize" onclick="minimizeWindow('win-resume')"></span>
+        </div>
+        <div class="win-title">Resume.pdf</div>
+      </div>
+      <div class="resume-toolbar">
+        <a href="resume.pdf" download="March_Siwawong_Resume.pdf" class="resume-download-btn">↓ Download PDF</a>
+      </div>
+      <div class="win-body resume-body">
+        <iframe src="resume.pdf#toolbar=0&navpanes=0&view=FitH" class="resume-frame" title="Resume Preview"></iframe>
+      </div>
+    </div>
+
+  </div><!-- /desktop -->
+
+  <!-- HIDDEN DOWNLOAD LINK -->
+  <a id="resume-dl" href="resume.pdf" download="March_Siwawong_Resume.pdf" style="display:none"></a>
+
+  <script src="script.js"></script>
+</body>
+</html>
