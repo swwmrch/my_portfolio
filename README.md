@@ -12,9 +12,9 @@ march-portfolio/
 ├── api/
 │   └── chat.js       ← Vercel serverless function (Claude API proxy)
 ├── vercel.json       ← Vercel config
-├── resume.pdf        ← ⚠️ ADD YOUR RESUME HERE
-├── photo.jpg         ← ⚠️ ADD YOUR PHOTO HERE
-└── certs/            ← ⚠️ ADD CERTIFICATE IMAGES HERE (optional)
+├── resume.pdf        
+├── photo.jpg         
+└── certs/           
 ```
 
 ## Setup Locally
