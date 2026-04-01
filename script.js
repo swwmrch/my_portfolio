@@ -250,14 +250,15 @@ async function sendChat() {
     thinking.remove();
     const reply = document.createElement('div');
     reply.className = 'chat-msg assistant tg-bubble-in';
-    reply.textContent = data.reply || 'No response.';
+    reply.textContent = data.reply || data.error || 'No response.';
     messages.appendChild(reply);
-  } catch {
+  } catch (e) {
     thinking.remove();
     const err = document.createElement('div');
     err.className = 'chat-msg assistant tg-bubble-in';
     err.textContent = 'Something went wrong. Try again later.';
     messages.appendChild(err);
+    console.error('Chat error:', e);
   }
 
   messages.scrollTop = messages.scrollHeight;
