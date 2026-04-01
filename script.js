@@ -179,6 +179,17 @@ document.addEventListener('mousemove', e => {
 
 document.addEventListener('mouseup', () => { itemDragging = null; });
 
+/* ─── SPOTIFY EMBED ─── */
+window.onSpotifyIframeApiReady = (IFrameAPI) => {
+  const element = document.getElementById('embed-iframe');
+  const options = {
+    uri: 'spotify:playlist:64bfMusHd1W2TawcJkoc1a',
+    width: '100%',
+    height: 80,
+  };
+  IFrameAPI.createController(element, options, () => {});
+};
+
 /* ─── RESUME DOWNLOAD ─── */
 function triggerDownload() {
   document.getElementById('resume-dl').click();
@@ -199,10 +210,10 @@ const SYSTEM_PROMPT = `You are a friendly, concise AI assistant for March (Siwaw
 FACTS ABOUT MARCH:
 - Full name: Siwawong Jearramanon, goes by "March"
 - Age: 22, based in Bangkok, Thailand. Open to remote/international roles.
-- Email: march.siwawong@gmail.com | GitHub: github.com/swwmrch
+- Email: siwawong.jear@gmail.com | GitHub: github.com/swwmrch
 - Education: Multimedia and Entertainment Engineering, Bangkok University, GPA 3.54 (2022–present)
 - Experience: Audio Engineer Intern at The Standard (Jun–Aug 2025) — Logic Pro X, dialogue mastering, broadcast audio pipeline, QC under production deadlines
-- Projects: (1) Balance Game System — Unity, C#, Arduino (thesis, real-time sensor feedback loop), (2) AI Trading System — Python, LLM, prompt design (in progress), (3) Broadcast Audio Pipeline at The Standard, (4) This portfolio website itself
+- Projects: (1) Balance Game System — Unity, C#, Arduino, Figma (thesis, real-time sensor feedback loop; Figma used for game flow and UI design), (2) AI Trading System — Python, LLM, prompt design (in progress), (3) Broadcast Audio Pipeline at The Standard, (4) This portfolio website itself
 - Skills: Prompt engineering, few-shot learning, chain-of-thought, Claude/GPT-4, output evaluation, C# Unity, Arduino, HTML/CSS/JS, Python (learning), Logic Pro X, dialogue mastering
 - Career target: Prompt Engineer — AI product teams, research, or tooling. Open to remote and international.
 - Languages: Thai (native), English (professional)
@@ -224,21 +235,47 @@ async function sendChat() {
   messages.appendChild(userMsg);
 
   const thinking = document.createElement('div');
-  thinking.className = 'chat-msg assistant thinking';
+  thinking.className = 'chat-msg assistant tg-bubble-in thinking';
   thinking.textContent = 'Thinking...';
   messages.appendChild(thinking);
   messages.scrollTop = messages.scrollHeight;
 
-  setTimeout(() => {
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: text, systemPrompt: SYSTEM_PROMPT })
+    });
+    const data = await res.json();
     thinking.remove();
     const reply = document.createElement('div');
-    reply.className = 'chat-msg assistant';
-    reply.textContent = 'This feature is unavailable right now.';
+    reply.className = 'chat-msg assistant tg-bubble-in';
+    reply.textContent = data.reply || 'No response.';
     messages.appendChild(reply);
-    messages.scrollTop = messages.scrollHeight;
-  }, 600);
+  } catch {
+    thinking.remove();
+    const err = document.createElement('div');
+    err.className = 'chat-msg assistant tg-bubble-in';
+    err.textContent = 'Something went wrong. Try again later.';
+    messages.appendChild(err);
+  }
 
   messages.scrollTop = messages.scrollHeight;
+}
+
+/* ─── PROJECT BROWSER ─── */
+function openProject(idx) {
+  openWindow('win-projects');
+  selectProject(idx);
+}
+
+function selectProject(idx) {
+  document.querySelectorAll('#win-projects .browser-item').forEach((el, i) => {
+    el.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.browser-project').forEach((el, i) => {
+    el.classList.toggle('active', i === idx);
+  });
 }
 
 /* ─── CLOSE WINDOWS ON DESKTOP CLICK ─── */
@@ -247,6 +284,11 @@ document.getElementById('desktop').addEventListener('click', e => {
     document.querySelectorAll('.folder-item.selected').forEach(el => el.classList.remove('selected'));
   }
 });
+
+/* ─── CERT PDF ─── */
+function openCertPDF(url) {
+  window.open(url, '_blank');
+}
 
 /* ─── FOLDER SINGLE CLICK SELECT ─── */
 document.querySelectorAll('.folder-item').forEach(item => {

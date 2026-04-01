@@ -10,25 +10,25 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const apiKey = process.env.GEMINI_API_KEY;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+    const response = await fetch(url, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 300,
-        system: systemPrompt || 'You are a helpful assistant.',
-        messages: [
-          { role: 'user', content: message }
-        ]
+        system_instruction: {
+          parts: [{ text: systemPrompt || 'You are a helpful assistant.' }]
+        },
+        contents: [
+          { role: 'user', parts: [{ text: message }] }
+        ],
+        generationConfig: { maxOutputTokens: 300 }
       })
     });
 
     const data = await response.json();
-    const reply = data?.content?.[0]?.text || 'No response.';
+    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'No response.';
     return res.status(200).json({ reply });
 
   } catch (err) {
