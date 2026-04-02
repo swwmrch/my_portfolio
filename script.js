@@ -246,7 +246,13 @@ async function sendChat() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: text, systemPrompt: SYSTEM_PROMPT })
     });
-    const data = await res.json();
+    let data;
+    try {
+      data = await res.json();
+    } catch {
+      const raw = await res.text().catch(() => '');
+      throw new Error(`Non-JSON response (${res.status}): ${raw.slice(0, 100)}`);
+    }
     thinking.remove();
     const reply = document.createElement('div');
     reply.className = 'chat-msg assistant tg-bubble-in';

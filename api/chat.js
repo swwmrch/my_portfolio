@@ -27,12 +27,18 @@ export default async function handler(req, res) {
       })
     });
 
+    if (!response.ok) {
+      const errText = await response.text();
+      console.error('Gemini API error:', response.status, errText);
+      return res.status(502).json({ error: `Gemini error ${response.status}: ${errText.slice(0, 200)}` });
+    }
+
     const data = await response.json();
     const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'No response.';
     return res.status(200).json({ reply });
 
   } catch (err) {
-    console.error(err);
-    return res.status(500).json({ error: 'API error' });
+    console.error('Handler error:', err);
+    return res.status(500).json({ error: err.message || 'API error' });
   }
 }
