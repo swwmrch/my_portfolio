@@ -471,9 +471,9 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: var(--san
 /* Telegram titlebar override */
 .tg-titlebar { background: var(--tg-blue) !important; height: 52px !important; justify-content: flex-start; gap: 0; }
 .tg-titlebar .win-controls { margin-right: 10px; }
-.tg-titlebar .win-btn.close { background: rgba(255,255,255,0.5); }
-.tg-titlebar .win-btn.maximize { background: rgba(255,255,255,0.5); }
-.tg-titlebar .win-btn.minimize { background: rgba(255,255,255,0.5); }
+.tg-titlebar .win-btn.close { background: #ff5f57; }
+.tg-titlebar .win-btn.maximize { background: #febc2e; }
+.tg-titlebar .win-btn.minimize { background: #28c840; }
 .tg-titlebar .win-btn:hover { filter: brightness(1.2); }
 
 .tg-header-info { display: flex; align-items: center; gap: 10px; }
