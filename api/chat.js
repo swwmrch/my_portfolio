@@ -10,31 +10,33 @@ export default async function handler(req, res) {
   }
 
   try {
-    const apiKey = process.env.GEMINI_API_KEY;
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+    const apiKey = process.env.ANTHROPIC_API_KEY;
 
-    const response = await fetch(url, {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01'
+      },
       body: JSON.stringify({
-        system_instruction: {
-          parts: [{ text: systemPrompt || 'You are a helpful assistant.' }]
-        },
-        contents: [
-          { role: 'user', parts: [{ text: message }] }
-        ],
-        generationConfig: { maxOutputTokens: 300 }
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 300,
+        system: systemPrompt || 'You are a helpful assistant.',
+        messages: [
+          { role: 'user', content: message }
+        ]
       })
     });
 
     if (!response.ok) {
       const errText = await response.text();
-      console.error('Gemini API error:', response.status, errText);
-      return res.status(502).json({ error: `Gemini error ${response.status}: ${errText.slice(0, 200)}` });
+      console.error('Anthropic API error:', response.status, errText);
+      return res.status(502).json({ error: `API error ${response.status}: ${errText.slice(0, 200)}` });
     }
 
     const data = await response.json();
-    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'No response.';
+    const reply = data?.content?.[0]?.text || 'No response.';
     return res.status(200).json({ reply });
 
   } catch (err) {
