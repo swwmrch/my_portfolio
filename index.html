@@ -54,7 +54,10 @@
     <div class="desktop-item" id="photo-widget" style="left:32px; top:60px;">
       <div class="polaroid">
         <div class="polaroid-img">
-          <img src="photo.jpeg" alt="March" onerror="this.style.display='none'; this.parentElement.classList.add('photo-placeholder')">
+          <picture>
+            <source srcset="photo.webp" type="image/webp">
+            <img src="photo.jpeg" alt="March" width="226" height="210" onerror="this.style.display='none'; this.closest('.polaroid-img').classList.add('photo-placeholder')">
+          </picture>
         </div>
         <div class="polaroid-caption">march, 2025</div>
       </div>
@@ -132,7 +135,7 @@
     <div class="desktop-item folder-item app-item" id="app-vscode" style="right:36px; top:58px;"
          ondblclick="openProject(3)">
       <div class="app-icon icon-img">
-        <img src="icons/vscode.png" alt="VS Code">
+        <img src="icons/vscode.png" alt="VS Code" width="70" height="70">
       </div>
       <div class="folder-label">VS Code</div>
     </div>
@@ -141,7 +144,7 @@
     <div class="desktop-item folder-item app-item" id="app-logic" style="right:36px; top:148px;"
          ondblclick="openProject(2)">
       <div class="app-icon icon-img">
-        <img src="icons/logic.png" alt="Logic Pro">
+        <img src="icons/logic.png" alt="Logic Pro" width="70" height="70">
       </div>
       <div class="folder-label">Logic Pro</div>
     </div>
@@ -150,7 +153,7 @@
     <div class="desktop-item folder-item app-item" id="app-github" style="left:36px; top:415px;"
          ondblclick="window.open('https://github.com/swwmrch','_blank')">
       <div class="app-icon icon-img">
-        <img src="icons/github.png" alt="GitHub">
+        <img src="icons/github.png" alt="GitHub" width="70" height="70">
       </div>
       <div class="folder-label">GitHub</div>
     </div>
@@ -159,7 +162,7 @@
     <div class="desktop-item folder-item app-item" id="app-figma" style="left:120px; top:415px;"
          ondblclick="openProject(0)">
       <div class="app-icon icon-img">
-        <img src="icons/figma.png" alt="Figma">
+        <img src="icons/figma.png" alt="Figma" width="70" height="70">
       </div>
       <div class="folder-label">Figma</div>
     </div>
@@ -168,7 +171,7 @@
     <div class="desktop-item folder-item app-item" id="app-unity" style="right:36px; top:238px;"
          ondblclick="openProject(0)">
       <div class="app-icon icon-img">
-        <img src="icons/unity.png" alt="Unity">
+        <img src="icons/unity.png" alt="Unity" width="70" height="70">
       </div>
       <div class="folder-label">Unity</div>
     </div>
@@ -177,7 +180,7 @@
     <div class="desktop-item folder-item app-item" id="app-python" style="right:36px; top:328px;"
          ondblclick="openProject(1)">
       <div class="app-icon icon-img">
-        <img src="icons/python.png" alt="Python">
+        <img src="icons/python.png" alt="Python" width="70" height="70">
       </div>
       <div class="folder-label">Python</div>
     </div>
@@ -201,26 +204,26 @@
     <div id="dock">
       <div class="dock-wrap">
         <div class="dock-item" onclick="scrollToTop()" title="Home">
-          <div class="dock-icon dock-img-icon"><img src="icons/dock-home.png" alt="Home"></div>
+          <div class="dock-icon dock-img-icon"><img src="icons/dock-home.png" alt="Home" width="48" height="48"></div>
           <div class="dock-dot"></div>
           <div class="dock-tooltip">Home</div>
         </div>
         <div class="dock-item" onclick="openWindow('win-projects')" title="Projects">
-          <div class="dock-icon dock-img-icon"><img src="icons/dock-projects.png" alt="Projects"></div>
+          <div class="dock-icon dock-img-icon"><img src="icons/dock-projects.png" alt="Projects" width="48" height="48"></div>
           <div class="dock-tooltip">Projects</div>
         </div>
         <div class="dock-item" onclick="openWindow('chat-win')" title="Ask March">
-          <div class="dock-icon dock-img-icon"><img src="icons/telegramai.png" alt="Ask March"></div>
+          <div class="dock-icon dock-img-icon"><img src="icons/telegramai.png" alt="Ask March" width="48" height="48"></div>
           <div class="dock-dot"></div>
           <div class="dock-tooltip" data-en="Ask March" data-th="ถามมาร์ช">Ask March</div>
         </div>
         <div class="dock-item" onclick="openWindow('win-resume')" title="Resume">
-          <div class="dock-icon dock-img-icon"><img src="icons/dock-resume.png" alt="Resume"></div>
+          <div class="dock-icon dock-img-icon"><img src="icons/dock-resume.png" alt="Resume" width="48" height="48"></div>
           <div class="dock-tooltip">Resume.pdf</div>
         </div>
         <div class="dock-separator"></div>
         <div class="dock-item" onclick="openWindow('contact-win')" title="Contact">
-          <div class="dock-icon dock-img-icon"><img src="icons/dock-contact.png" alt="Contact"></div>
+          <div class="dock-icon dock-img-icon"><img src="icons/dock-contact.png" alt="Contact" width="48" height="48"></div>
           <div class="dock-tooltip">Contact</div>
         </div>
       </div>
@@ -613,27 +616,27 @@
         <p class="win-note" data-en="Other tools in the stack — always learning more." data-th="เครื่องมืออื่นๆ ที่ใช้งาน — เรียนรู้เพิ่มอยู่เสมอ">Other tools in the stack — always learning more.</p>
         <div class="tools-icon-grid">
           <div class="tool-icon-item">
-            <div class="app-icon icon-img"><img src="icons/arduino.png" alt="Arduino"></div>
+            <div class="app-icon icon-img"><img src="icons/arduino.png" alt="Arduino" width="70" height="70" loading="lazy"></div>
             <div class="tool-icon-label">Arduino</div>
           </div>
           <div class="tool-icon-item">
-            <div class="app-icon icon-img"><img src="icons/csharp.png" alt="C#"></div>
+            <div class="app-icon icon-img"><img src="icons/csharp.png" alt="C#" width="70" height="70" loading="lazy"></div>
             <div class="tool-icon-label">C#</div>
           </div>
           <div class="tool-icon-item">
-            <div class="app-icon icon-img"><img src="icons/html.png" alt="HTML/CSS/JS"></div>
+            <div class="app-icon icon-img"><img src="icons/html.png" alt="HTML/CSS/JS" width="70" height="70" loading="lazy"></div>
             <div class="tool-icon-label">HTML/CSS/JS</div>
           </div>
           <div class="tool-icon-item">
-            <div class="app-icon icon-img"><img src="icons/claude.png" alt="Claude"></div>
+            <div class="app-icon icon-img"><img src="icons/claude.png" alt="Claude" width="70" height="70" loading="lazy"></div>
             <div class="tool-icon-label">Claude</div>
           </div>
           <div class="tool-icon-item">
-            <div class="app-icon icon-img"><img src="icons/chatgpt.png" alt="ChatGPT"></div>
+            <div class="app-icon icon-img"><img src="icons/chatgpt.png" alt="ChatGPT" width="70" height="70" loading="lazy"></div>
             <div class="tool-icon-label">ChatGPT</div>
           </div>
           <div class="tool-icon-item">
-            <div class="app-icon icon-img"><img src="icons/gemini.png" alt="Gemini"></div>
+            <div class="app-icon icon-img"><img src="icons/gemini.png" alt="Gemini" width="70" height="70" loading="lazy"></div>
             <div class="tool-icon-label">Gemini</div>
           </div>
         </div>
@@ -645,6 +648,6 @@
   <!-- HIDDEN DOWNLOAD LINK -->
   <a id="resume-dl" href="resume.pdf" download="March_Siwawong_Resume.pdf" style="display:none"></a>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

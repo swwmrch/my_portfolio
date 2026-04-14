@@ -17,12 +17,19 @@ export default async function handler(req, res) {
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01'
+        'anthropic-version': '2023-06-01',
+        'anthropic-beta': 'prompt-caching-2024-07-31'
       },
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
         max_tokens: 300,
-        system: systemPrompt || 'You are a helpful assistant.',
+        system: [
+          {
+            type: 'text',
+            text: systemPrompt || 'You are a helpful assistant.',
+            cache_control: { type: 'ephemeral' }
+          }
+        ],
         messages: [
           { role: 'user', content: message }
         ]
